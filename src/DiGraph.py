@@ -25,8 +25,8 @@ class DiGraph :
         dict = {}
         for src in list:
            # e = MyEdge()
-            e = self._E.get(str(src)+","+str(node.get_key()))
-            dict[src] = e.getWeight()
+            e = self._E.get(str(int(src))+","+str(node.get_key()))
+            dict[int(src)] = e.getWeight()
         return dict
 
     def all_out_edges_of_node(self, id1: int) -> dict:
@@ -35,7 +35,7 @@ class DiGraph :
             list = node.get_out_edges().copy()
             dict = {}
             for dest in list:
-                e = self._E.get(str(node.get_key())+","+str(dest))
+                e = self._E.get(str(node.get_key())+","+str(int(dest)))
                 dict[dest] = e.getWeight()
             return dict
         else:
@@ -50,7 +50,7 @@ class DiGraph :
     def add_edge(self, id1: int, id2: int, weight: float) -> bool:
         e = MyEdge(id1, id2,weight)
         if id1 in self._V and id2 in self._V:
-            self._E[str(e.getSrc())+","+str(e.getDest())]=e
+            self._E[e.getKey()]=e
             self._V.get(id1).add_edge_list(e)
             self._V.get(id2).add_edge_list(e)
             self._MC += 1

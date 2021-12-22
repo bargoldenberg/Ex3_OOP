@@ -1,3 +1,4 @@
+import heapq
 import json
 from typing import List
 from API import GraphInterface
@@ -20,7 +21,7 @@ class GraphAlgo:
                     continue
                 else:
                     for edge in out.keys():
-                        self.g.add_edge(node.get_key(),edge,out[edge])
+                        self.g.add_edge(int(node.get_key()),int(edge),out[edge])
 
 
     def get_graph(self) -> GraphInterface:
@@ -76,7 +77,8 @@ class GraphAlgo:
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         distance = {}
         prev = {}
-        nodes_queue = PriorityQueue()
+        nodes_queue = []
+        heapq.heapify(nodes_queue)
         queueset = {}
         path = []
         v = self.g.get_all_v()
@@ -84,13 +86,15 @@ class GraphAlgo:
         for node in v.values():
             if node.get_key() == id1:
                 distance[node.get_key()] = 0.0
-                nodes_queue.put((distance[node.get_key()], node.get_key()))
+                #nodes_queue.put((distance[node.get_key()], node.get_key()))
+                heapq.heappush(nodes_queue,(distance[node.get_key()], node.get_key()))
                 queueset[node.get_key()]=node.get_key()
             else:
                 distance[node.get_key()] = float('inf')
             prev[node.get_key()] = None
-        while not nodes_queue.empty():
-            smallest = nodes_queue.get()[1]
+        while not len(nodes_queue) == 0:
+            #smallest = nodes_queue.get()[1]
+            smallest = heapq.heappop(nodes_queue)[1]
             queueset.pop(smallest)
             if smallest == id2:
                 while prev[smallest] is not None:
@@ -102,7 +106,7 @@ class GraphAlgo:
                 break;
             else:
                 if v[smallest].get_out_edges() is None:
-                    return float('inf')
+                    return (float('inf'),[])
                 else:
                     for i in range(len(v[smallest].get_out_edges())):
                         neighbor = e[str(smallest)+','+str(v[v[smallest].get_out_edges()[i]].get_key())]
@@ -111,7 +115,8 @@ class GraphAlgo:
                             distance[neighbor.getDest()]=dis
                             prev[neighbor.getDest()]=smallest
                             if neighbor.getDest() not in queueset:
-                                nodes_queue.put((distance[neighbor.getDest()],neighbor.getDest()))
+                                #nodes_queue.put((distance[neighbor.getDest()],neighbor.getDest()))
+                                heapq.heappush(nodes_queue,(distance[neighbor.getDest()],neighbor.getDest()))
                                 queueset[neighbor.getDest()]=neighbor.getDest()
         if distance[id2] is not float('inf') and len(path)>0:
             return (distance[id2],path)
@@ -119,21 +124,21 @@ class GraphAlgo:
     def shortest_path_map(self, id1):
         distance = {}
         prev = {}
-        nodes_queue = PriorityQueue()
+        nodes_queue = []
+        heapq.heapify(nodes_queue)
         queueset = {}
-        path = []
         v = self.g.get_all_v()
         e = self.g.get_all_e()
         for node in v.values():
             if node.get_key() == id1:
                 distance[node.get_key()] = 0.0
-                nodes_queue.put((distance[node.get_key()], node.get_key()))
+                heapq.heappush(nodes_queue, (distance[node.get_key()], node.get_key()))
                 queueset[node.get_key()]=node.get_key()
             else:
                 distance[node.get_key()] = float('inf')
             prev[node.get_key()] = None
-        while not nodes_queue.empty():
-            smallest = nodes_queue.get()[1]
+        while not len(nodes_queue)==0:
+            smallest = heapq.heappop(nodes_queue)[1]
             queueset.pop(smallest)
             if distance[smallest] == float('inf'):
                 break;
@@ -145,7 +150,7 @@ class GraphAlgo:
                         distance[neighbor.getDest()]=dis
                         prev[neighbor.getDest()]=smallest
                         if neighbor.getDest() not in queueset:
-                            nodes_queue.put((distance[neighbor.getDest()],neighbor.getDest()))
+                            heapq.heappush(nodes_queue, (distance[neighbor.getDest()], neighbor.getDest()))
                             queueset[neighbor.getDest()]=neighbor.getDest()
 
         return distance
