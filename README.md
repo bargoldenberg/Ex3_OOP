@@ -7,4 +7,4 @@ The purpose of the current assignment is to implement the same project on Python
 For full recap of this project we recommend to read the [wiki](https://github.com/bargoldenberg/Ex3_OOP/wiki) page.<br/>
 
 
-![pic](https://media-exp1.licdn.com/dms/image/C4E1BAQGDA2hsAJAoJQ/company-background_10000/0/1569882534475?e=2159024400&v=beta&t=qeajua5bXxbeY3V1YAlxYyG-PIPvNLKrqe3awSWUBp4)
+![pic](https://cdn.the-scientist.com/assets/articleNo/39386/iImg/21772/eefa2b31-43a6-4e78-9953-890169705ac4-connected.jpg)
