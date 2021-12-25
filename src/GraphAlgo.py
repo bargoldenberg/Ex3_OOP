@@ -118,8 +118,7 @@ class GraphAlgo:
                                 #nodes_queue.put((distance[neighbor.getDest()],neighbor.getDest()))
                                 heapq.heappush(nodes_queue,(distance[neighbor.getDest()],neighbor.getDest()))
                                 queueset[neighbor.getDest()]=neighbor.getDest()
-        if distance[id2] is not float('inf') and len(path)>0:
-            return (distance[id2],path)
+        return (distance[id2],path)
 
     def shortest_path_map(self, id1):
         distance = {}
