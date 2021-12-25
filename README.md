@@ -7,4 +7,4 @@ The purpose of the current assignment is to implement the same project on Python
 For full recap of this project we recommend to read the [wiki](https://github.com/bargoldenberg/Ex3_OOP/wiki) page.<br/>
 
 
-![pic](https://cdn.the-scientist.com/assets/articleNo/39386/iImg/21772/eefa2b31-43a6-4e78-9953-890169705ac4-connected.jpg)
+![pic](https://media.istockphoto.com/photos/blockchain-network-polygon-graphic-with-abstract-wave-pattern-picture-id1263641972?b=1&k=20&m=1263641972&s=170667a&w=0&h=RN130b_moSOjXtr71VqD2fh9sFWopr-Ty9TQ3T_zl-M=)
