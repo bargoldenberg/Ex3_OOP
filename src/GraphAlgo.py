@@ -177,6 +177,27 @@ class GraphAlgo:
         for edge in self.g.get_all_e().values():
             graphT.add_edge(edge.getDest(),edge.getSrc(),edge.getWeight())
         return graphT
+    '''
+    two Helpers for TCP:
+    1.smallest_dist - gets array of distances(flout) and return the index(!!) of the smallest.
+    2.total_weight - get a list of paths(as ints - representing the id's), and return the total weight according to the order of the list.
+    '''
+
+    def smallest_dist(self,distance_list):
+        index_of_smallest = 0
+        smallest =distance_list[0]
+        for i in range(len(distance_list)):
+            if distance_list[i] < smallest:
+                smallest = distance_list[i]
+                index_of_smallest = i
+        return index_of_smallest
+    def total_weight(self,cities: List):
+        weight = 0.0
+        for i in range(len(cities)):
+            if i < len(cities)-1:
+                weight += self.shortest_path(cities[i],cities[i+1])[-2]
+        return weight
+
 
     def TSP(self, node_lst: List[int]) -> (List[int], float):
         """
@@ -184,6 +205,60 @@ class GraphAlgo:
         :param node_lst: A list of nodes id's
         :return: A list of the nodes id's in the path, and the overall distance
         """
+        all_path = []
+        index = 0
+        my_dist = []
+        flag = True
+        # First, check if the sub graph (all the nodes on the list) is connected.
+        path_check = 0
+        for i in range(len(node_lst)):
+            if i != 0:
+                path_check = self.shortest_path(node_lst[0], node_lst[i])[-2]
+                if path_check <= 0:
+                    flag = False
+        for i in range(len(node_lst)):
+            if i != 0:
+                path_check = self.shortest_path(node_lst[i],node_lst[0])[-2]
+                if path_check <= 0:
+                    flag = False
+        if flag is False:
+            return None
+        else:
+            for num in range(len(node_lst)):
+                curr = num
+                rightOrder = []
+                tmp = 0
+                counter = 0
+                distance =[]
+                ptr = self.g._V.get(curr)
+                rightOrder.append(ptr)
+                while counter<len(node_lst) and len(rightOrder)< len(node_lst):
+                    ptr = self.g._V.get(curr)
+                    tmp = curr
+                    for i in range(len(node_lst)):
+                        if ptr.get_key() is not node_lst[i]:
+                            distance.append(self.shortest_path(ptr.get_key(),node_lst[i]))
+                        else:
+                            distance.append(self.shortest_path(ptr.get_key(),node_lst[i]))
+                    while curr is tmp:
+                        smallest = self.smallest_dist(distance)
+                        if smallest not in rightOrder:
+                            rightOrder.append(smallest)
+                            curr = smallest
+                            counter += 1
+                        elif len(rightOrder) is not len(node_lst):
+                            distance[smallest] = float('inf')
+                        else:
+                            break
+                    if len(rightOrder) is len(node_lst):
+                        break
+                if len(rightOrder) is len(node_lst):
+                    all_path.append(rightOrder)
+            for i in range(len(all_path)):
+                my_dist.append(self.total_weight(all_path[i]))
+            index = smallest(my_dist)
+
+            return (all_path[i],my_dist[i])
 
     def isConnected(self):
         visited={}

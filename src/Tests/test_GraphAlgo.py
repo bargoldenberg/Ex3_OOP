@@ -98,6 +98,15 @@ class MyTestCase(unittest.TestCase):
         duraction.total_seconds()
         self.assertTrue(duraction.total_seconds() < 1500)
 
+    def test_TSP(self):
+        gr = DiGraph()
+        g = GraphAlgo(gr)
+        g.load_from_json(r'C:\Users\sappi\PycharmProjects\Ex3_OOP\data\Tsp_test.json')
+        a = g.TSP([0,2])
+        print('printing:')
+        print(a)
+        # self.assertEqual([0,1,2],g.TSP([0,2])[-1])
+
 
 
 
