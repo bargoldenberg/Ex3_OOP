@@ -1,9 +1,12 @@
 import unittest
 import sys
-sys.path.append("/home/bar/PycharmProjects/pythonProject1/src")
-from src.DiGraph import DiGraph
-from src.MyEdge import *
-from src.MyNode import *
+import os
+path = sys.path.append(os.path.abspath(os.path.join('..','..','src')))
+path1 = ''
+path = path1
+from DiGraph import DiGraph
+
+from MyNode import *
 
 class TestDiGraph(unittest.TestCase):
     def test_v_size(self):
