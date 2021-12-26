@@ -73,7 +73,6 @@ class GraphAlgo:
         with open(file_name, "w") as outfile:
             outfile.write(jsonstr)
 
-
     def shortest_path(self, id1: int, id2: int) -> (float, list):
         distance = {}
         prev = {}
@@ -179,13 +178,13 @@ class GraphAlgo:
             graphT.add_edge(edge.getDest(),edge.getSrc(),edge.getWeight())
         return graphT
 
-
     def TSP(self, node_lst: List[int]) -> (List[int], float):
         """
         Finds the shortest path that visits all the nodes in the list
         :param node_lst: A list of nodes id's
         :return: A list of the nodes id's in the path, and the overall distance
         """
+
     def isConnected(self):
         visited={}
         v = self.g.get_all_v()
@@ -204,7 +203,6 @@ class GraphAlgo:
             if visited[vertex] is False:
                 return False
         return True
-
 
     def centerPoint(self) -> (int, float):
         if not self.isConnected():

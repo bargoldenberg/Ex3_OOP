@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class MyEdge{
+- src
+- dest
+- weight
++ geters()
++ seters()
+}
+
+class MyNode{
+- pos
+- key
+- weight
+- out_edges
+- in_ edges
++ geters()
++ seters()
+}
+
+class DiGraph{
+- V
+- E
+- MC
++v_size()
++e_size()
++get_all_v()
++all_in_edges_of_node()
++all_out_edges_of_node()
++get_mc()
++get_all_e()
++add_edge()
++add_node()
++remove_node()
++remove_edge()
++__repr__()
++connectinit()
+}
+
+class GraphAlgo{
+- g - graph
++__init__()
++get_graph()
++load_from_json()
++save_to_json()
++shortest_path()
++shortest_path_map()
++BFS()
++transpose_graph()
++smallest_dist()
++total_weight()
++TSP()
++isConnected()
++centerPoint()
++plot_graph()
+
+
+}
+class Main
+
+GraphAlgo <|-- MyEdge
+GraphAlgo <|-- MyNode
+Main <|-- GraphAlgo
+Main <|-- DiGraph
+
+@enduml
