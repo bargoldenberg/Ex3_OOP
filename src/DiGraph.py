@@ -81,6 +81,7 @@ class DiGraph :
             for i in range(in_size):
                 self.remove_edge(int(self._V.get(node_id).get_in_edges()[i]),self._V.get(node_id).get_key())
             for i in range(out_size):
+                i=0
                 self.remove_edge(self._V.get(node_id).get_key(),int(self._V.get(node_id).get_out_edges()[i]))
             self._V.pop(node_id)
             self._MC += 1

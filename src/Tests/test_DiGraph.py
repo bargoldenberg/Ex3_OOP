@@ -1,14 +1,12 @@
+
+
+
 import unittest
 import sys
 import os
-path = sys.path.append(os.path.abspath(os.path.join('..','..','src')))
-path1 = ''
-path = path1
+sys.path.append(os.path.abspath(os.path.join('..')))
 from src.DiGraph import DiGraph
-from src.GraphAlgo import GraphAlgo
-from src.MyNode import *
-
-
+from src.MyEdge import MyEdge
 class TestDiGraph(unittest.TestCase):
     def test_v_size(self):
         g=DiGraph()
@@ -98,7 +96,7 @@ class TestDiGraph(unittest.TestCase):
         size = len(e)
         self.assertEqual(0,size)
 
-     def test_remove_edge(self):
+    def test_remove_edge(self):
         g = DiGraph()
         g.add_node(5, (1, 2, 3))
         g.add_node(3, (1, 1, 3))
