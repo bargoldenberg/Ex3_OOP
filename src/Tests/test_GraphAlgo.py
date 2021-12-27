@@ -122,10 +122,9 @@ class MyTestCase(unittest.TestCase):
         gr = DiGraph()
         g = GraphAlgo(gr)
         g.load_from_json(tsptest)
-        a = g.TSP([0,2])
-        print('printing:')
-        print(a)
-        # self.assertEqual([0,1,2],g.TSP([0,2])[-1])
+        self.assertEqual([0, 1, 2], g.TSP([0, 2])[0])
+        self.assertEqual([0, 1, 2, 4], g.TSP([1, 0, 4])[0])
+        self.assertEqual([3, 5, 2], g.TSP([2, 3])[0])
 
 
 
